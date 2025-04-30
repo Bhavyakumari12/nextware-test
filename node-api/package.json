@@ -33,6 +33,7 @@
     "@middlewares": "dist/middleware",
     "@models": "./dist/model",
     "@routes": "dist/routes",
-    "@services": "dist/service"
+    "@services": "dist/service",
+    "@utils": "dist/utils"
   }
 }

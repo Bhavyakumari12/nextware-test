@@ -1,4 +1,5 @@
 import { user } from "@models";
+import HttpError from "@utils";
 import bcrypt from "bcryptjs";
 
 export const _createUser = async (userData: any) => {
@@ -6,7 +7,7 @@ export const _createUser = async (userData: any) => {
     const { name, email, password, company, age, dob } = userData;
     const existingUser = await user.findOne({ email });
     if (existingUser) {
-      throw new Error('Email is already registered.');
+      throw new HttpError("Email is already registered.", 400);
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new user({
@@ -19,7 +20,7 @@ export const _createUser = async (userData: any) => {
     });
     return await newUser.save();
   } catch (error) {
-    throw new Error("Error creating user: " + error);
+    throw new HttpError("Error creating user: " + error);
   }
 };
 
@@ -28,10 +29,12 @@ export const _login = async (data: any) => {
     const { email, password } = data;
     const userData = await user.findOne({ email });
     if (!userData) {
-      throw new Error("Invalid credentials");
+      throw new HttpError("Invalid credentials", 401);
     }
     const valid = await bcrypt.compare(password, userData?.password as string);
-    if (!valid) {throw new Error("Invalid password");}
+    if (!valid) {
+      throw new HttpError("Invalid password", 401);
+    }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     userData.otp = otp;
@@ -39,7 +42,7 @@ export const _login = async (data: any) => {
     await userData.save();
     return userData;
   } catch (error) {
-    throw new Error("Error fetching user: " + error);
+    throw new HttpError("Error fetching user: " + error);
   }
 };
 
@@ -53,7 +56,7 @@ export const _verifyOtp = async (data: any) => {
     userData.otp !== otp ||
     new Date() > (userData?.otpExpiresAt || 0)
   ) {
-    throw new Error("OTP invalid or expired");
+    throw new HttpError("OTP invalid or expired");
   }
   userData.otp = null;
   userData.otpExpiresAt = null;
@@ -63,13 +66,13 @@ export const _verifyOtp = async (data: any) => {
 
 export const _deleteUser = async (email: string) => {
   try {
-    const deletedUser = await user.findOneAndDelete({email});
+    const deletedUser = await user.findOneAndDelete({ email });
     console.log(deletedUser);
     if (!deletedUser) {
-      throw new Error("User not found");
+      throw new HttpError("User not found", 404);
     }
     return deletedUser;
   } catch (error) {
-    throw new Error("Error deleting user: " + error);
+    throw new HttpError("Error deleting user: " + error);
   }
 };

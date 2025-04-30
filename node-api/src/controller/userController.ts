@@ -3,14 +3,13 @@ import { _createUser, _login, _deleteUser, _verifyOtp } from "@services";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     const user = await _createUser(req.body);
     res.status(201).json({
       message: "User created successfully",
       data: user,
     });
-  } catch (error) {
-    res.status(500).json({
+  } catch (error: any) {
+    res.status(error.statusCode || 500).json({
       message: (error as Error).message || "Internal server error",
     });
   }
@@ -23,8 +22,8 @@ export const login = async (req: Request, res: Response) => {
       message: "Login successful",
       data: user,
     });
-  } catch (error) {
-    res.status(500).json({
+  } catch (error: any) {
+    res.status(error.statusCode || 500).json({
       message: (error as Error).message || "Internal server error",
     });
   }
@@ -37,8 +36,8 @@ export const verifyOtp = async (req: Request, res: Response) => {
       message: "OTP verified successfully",
       data: user,
     });
-  } catch (error) {
-    res.status(500).json({
+  } catch (error: any) {
+    res.status(error.statusCode || 500).json({
       message: (error as Error).message || "Internal server error",
     });
   }
@@ -51,8 +50,8 @@ export const deleteUser = async (req: Request, res: Response) => {
       message: "User deleted successfully",
       data: user,
     });
-  } catch (error) {
-    res.status(500).json({
+  } catch (error: any) {
+    res.status(error.statusCode || 500).json({
       message: (error as Error).message || "Internal server error",
     });
   }

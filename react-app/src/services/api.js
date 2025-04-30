@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "https://nextware-test-api.onrender.com/api";
 
 export const registerUser = (data) =>
   axios.post(`${API_BASE}/register`, data);;

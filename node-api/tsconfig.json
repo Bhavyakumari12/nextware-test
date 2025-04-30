@@ -17,6 +17,7 @@
       "@models": ["./src/model/index.ts"],
       "@routes": ["src/routes/index.ts"],
       "@services": ["src/service/index.ts"],
+      "@utils": ["src/utils/index.ts"]
     }
   }
 }
