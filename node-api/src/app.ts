@@ -3,7 +3,10 @@ import connectDB from './DB/connectDB';
 import bodyparser from 'body-parser';
 import cors from 'cors';
 import { loggerMiddleware } from './middleware';
-import userRoute from '@routes/userRoute';
+import 'module-alias/register';
+import { userRoute } from './routes';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app= express();
 const PORT= 3000;

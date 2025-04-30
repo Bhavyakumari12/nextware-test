@@ -1,6 +1,7 @@
-import { user } from "@models/userSchema";
+import { user } from "@models";
 import bcrypt from "bcryptjs";
-export const createUser = async (userData: any) => {
+
+export const _createUser = async (userData: any) => {
   try {
     const { name, email, password, company, age, dob } = userData;
     const existingUser = await user.findOne({ email });
@@ -22,7 +23,7 @@ export const createUser = async (userData: any) => {
   }
 };
 
-export const login = async (data: any) => {
+export const _login = async (data: any) => {
   try {
     const { email, password } = data;
     const userData = await user.findOne({ email });
@@ -42,7 +43,7 @@ export const login = async (data: any) => {
   }
 };
 
-export const verifyOtp = async (data: any) => {
+export const _verifyOtp = async (data: any) => {
   const { email, otp } = data;
   console.log(email, otp);
   const userData = await user.findOne({ email });
@@ -59,7 +60,8 @@ export const verifyOtp = async (data: any) => {
   await userData.save();
   return userData;
 };
-export const deleteUser = async (email: string) => {
+
+export const _deleteUser = async (email: string) => {
   try {
     const deletedUser = await user.findOneAndDelete({email});
     console.log(deletedUser);
