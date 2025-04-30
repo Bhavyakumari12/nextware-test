@@ -1,12 +1,34 @@
-# React + Vite
+# React User Authentication App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React-based user authentication application that allows users to register, log in, verify OTP, and delete their accounts. It is built with React, React Router, and TailwindCSS for styling.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Registration**: Users can create an account by providing their details.
+- **Login**: Users can log in using their email and password.
+- **OTP Verification**: After logging in, users must verify their identity using a one-time password (OTP).
+- **Account Deletion**: Users can delete their accounts from the system.
+- **Error Handling**: Displays an error page for failed operations.
 
-## Expanding the ESLint configuration
+## Pages
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Login Page** (`/`): Allows users to log in.
+- **Register Page** (`/register`): Allows users to create an account.
+- **OTP Verification Page** (`/verify-otp`): Prompts users to enter an OTP for verification.
+- **Thank You Page** (`/thank-you`): Displays user details and provides an option to delete the account.
+- **Error Page** (`/error`): Displays an error message for failed operations.
+
+## Technologies Used
+
+- **React**: Frontend framework for building user interfaces.
+- **React Router**: For routing and navigation between pages.
+- **Axios**: For making API requests to the backend.
+- **TailwindCSS**: For styling the application.
+- **Vite**: For fast development and build tooling.
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Bhavyakumari12/nextware-test.git
+   cd react-app
